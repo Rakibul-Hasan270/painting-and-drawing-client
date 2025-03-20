@@ -12,7 +12,8 @@ const Register = () => {
         const password = form.password.value;
         createUser(email, password)
             .then(res => {
-                console.log(res.user)
+                console.log(res.user);
+                form.reset();   
                 const user = { email };
 
                 fetch('http://localhost:5000/users', {

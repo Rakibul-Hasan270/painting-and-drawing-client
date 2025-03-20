@@ -1,14 +1,31 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { useContext } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Navbar = () => {
+
+    const { users, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+    console.log(users)
+
     const links = <div className='space-x-10'>
-        <NavLink  className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/'>Home</NavLink>
-        <NavLink  className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/login'>Login</NavLink>
-        <NavLink  className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/register'>Register</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/'>Home</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/login'>Login</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/register'>Register</NavLink>
     </div>
+
+    const handelSignOut = () => {
+        logOut()
+            .then(() => {
+                navigate('/login')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="max-w-6xl mx-auto navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -28,7 +45,14 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn">Sign in</Link>
+                {
+                    users ? <div className='flex gap-4 items-center'>
+                        <p>{users.email}</p>
+                        <button onClick={handelSignOut}>Sign out</button>
+                    </div> : <div>
+                        <Link to='/login' className="btn">Sign in</Link>
+                    </div>
+                }
             </div>
         </div>
     );

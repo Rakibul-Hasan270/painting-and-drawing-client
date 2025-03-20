@@ -6,12 +6,23 @@ import AuthProvider from './provider/AuthProvider.jsx'
 import Main from './pages/Main.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
+import Banner from './pages/Banner.jsx'
+import Header from './pages/Header.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
     children: [
+      {
+        path: '/',
+        element: <Header></Header>
+      },
+      {
+        path: '/banner',
+        element: <Banner></Banner>
+      }
+      ,
       {
         path: '/login',
         element: <Login></Login>

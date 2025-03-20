@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Login = () => {
-
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser, handelGoogleLogin } = useContext(AuthContext);
 
     const handelFormSubmit = event => {
         event.preventDefault();
@@ -15,11 +14,15 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log(result.user)
+                form.reset();
             })
             .catch(error => {
                 console.log(error)
             })
     }
+
+
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -33,6 +36,7 @@ const Login = () => {
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <button className="btn btn-neutral mt-4">Login</button>
                         </form>
+                        <button onClick={handelGoogleLogin} className='text-center font-bold btn'>Google Login</button>
                     </div>
                 </div>
             </div>
