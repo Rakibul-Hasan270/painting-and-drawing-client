@@ -6,7 +6,7 @@ const Navbar = () => {
 
     const { users, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(users)
+    // console.log(users)
 
     const links = <div className='space-x-10'>
         <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/'>Home</NavLink>
@@ -46,12 +46,23 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    users ? <div className='flex gap-4 items-center'>
-                        <p>{users.email}</p>
-                        <button onClick={handelSignOut}>Sign out</button>
-                    </div> : <div>
-                        <Link to='/login' className="btn">Sign in</Link>
-                    </div>
+                    users ?
+                        <div className='flex gap-4 items-center'>
+                            <div className="avatar avatar-online cursor-pointer relative group">
+                                <div className="w-10 rounded-full">
+                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                </div>
+                                {/* <div className="absolute group-hover:opacity-100">
+                                    {users.email}
+                                </div> */}
+                            </div>
+                            <button className='btn' onClick={handelSignOut}>Sign out</button>
+                        </div>
+                        :
+                        <div>
+                            <Link to='/login' className="btn">Sign in</Link>
+                            <Link to='/register' className="btn">Sign Up</Link>
+                        </div>
                 }
             </div>
         </div>

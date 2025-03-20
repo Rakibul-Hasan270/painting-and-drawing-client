@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
+import { Link } from 'react-router';
 
 const Login = () => {
     const { signInUser, handelGoogleLogin } = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     const handelFormSubmit = event => {
         event.preventDefault();
@@ -17,7 +19,8 @@ const Login = () => {
                 form.reset();
             })
             .catch(error => {
-                console.log(error)
+                setError(error.message);
+                form.reset();
             })
     }
 
@@ -37,6 +40,8 @@ const Login = () => {
                             <button className="btn btn-neutral mt-4">Login</button>
                         </form>
                         <button onClick={handelGoogleLogin} className='text-center font-bold btn'>Google Login</button>
+                        <p className='text-center'>New here? <Link to='/register' className='hover:underline text-blue-400'>please Register</Link></p>
+                        <p className='text-red-700'>{error}</p>
                     </div>
                 </div>
             </div>

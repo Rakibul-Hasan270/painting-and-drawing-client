@@ -8,6 +8,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Banner from './pages/Banner.jsx'
 import Header from './pages/Header.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         element: <Register></Register>
       }
     ]
+  },
+  {
+    path: '*',
+    element: <NotFound />
   }
 ])
 
