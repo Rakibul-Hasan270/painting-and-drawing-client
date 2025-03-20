@@ -33,7 +33,7 @@ const Register = () => {
                     })
             })
             .then(error => {
-                // console.log(error);
+                console.log(error);
             })
     }
     return (
