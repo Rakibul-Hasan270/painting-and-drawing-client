@@ -10,6 +10,8 @@ const Navbar = () => {
 
     const links = <div className='space-x-10'>
         <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/'>Home</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/artItem'>Arts & Crafts Item</NavLink>
+        {users && <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/addCraft'>Add Crafts</NavLink>}
         <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/login'>Login</NavLink>
         <NavLink className={({ isActive }) => isActive ? "text-blue-500 font-bold" : ""} to='/register'>Register</NavLink>
     </div>

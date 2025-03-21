@@ -9,6 +9,9 @@ import Register from './pages/Register.jsx'
 import Banner from './pages/Banner.jsx'
 import Header from './pages/Header.jsx'
 import NotFound from './pages/NotFound.jsx'
+import ProductList from './components/ProductList.jsx'
+import AddCraftList from './protectedRoute/AddCraftList.jsx'
+import PrivateRoute from './protectedRoute/PrivateRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,13 +20,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Header></Header>
+        element: <Header></Header>,
+        loader: () => fetch('http://localhost:5000/products')
       },
       {
-        path: '/banner',
-        element: <Banner></Banner>
-      }
-      ,
+        path: '/productList',
+        element: <ProductList></ProductList>
+      },
+      {
+        path: '/addCraft',
+        element: <PrivateRoute><AddCraftList></AddCraftList></PrivateRoute>
+      },
+      // {
+      //   path: '/details',
+      //   element: 
+      // },
       {
         path: '/login',
         element: <Login></Login>

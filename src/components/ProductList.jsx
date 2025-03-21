@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { Link } from 'react-router';
 
-const ProductList = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetch("https://your-api.com/api/products")  // Backend থেকে Product Data আনবে
-            .then((res) => res.json())
-            .then((data) => setProducts(data));
-    }, []);
-
+const ProductList = ({ product }) => {
+    const { image, item_name, subcategory_name, description, price, rating, _id } = product;
+    const handelViewDetails = id => {
+        console.log(id)
+    }
     return (
-        <div className="container mx-auto p-6">
-            <h2 className="text-3xl font-bold text-center mb-6">Our Arts & Crafts</h2>
+        <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden w-full sm:w-[320px] transition-transform transform hover:scale-105 hover:shadow-lg">
+            {/* Product Image */}
+            <img src={image} alt={item_name} className="w-full h-52 object-cover" />
 
-            {/* Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products.map((product) => (
-                    <div key={product._id} className="bg-white p-4 shadow-lg rounded-lg hover:shadow-2xl transition">
-                        <img src={product.image} alt={product.name} className="w-full h-60 object-cover rounded-lg mb-3" />
-                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                        <p className="text-gray-600">${product.price}</p>
-                        <button className="mt-3 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">
-                            Add to Cart
-                        </button>
-                    </div>
-                ))}
+            {/* Product Details */}
+            <div className="p-5">
+                <h2 className="text-lg font-bold text-gray-800">{item_name}</h2>
+                <p className="text-sm text-gray-500">{subcategory_name}</p>
+                <div className="flex justify-between items-center mt-2">
+                    <p className="text-lg font-bold text-blue-600">${price}</p>
+                    <p className="text-sm text-yellow-500 font-semibold">⭐ {rating} / 5</p>
+                </div>
+
+                <p className="text-gray-700 text-sm mt-3">
+                    {description.length > 80 ? description.substring(0, 80) + "..." : description}
+                </p>
+
+                {/* View Details Button */}
+                <Link to={`/productDetails/${_id}`}>
+                    <button onClick={() => handelViewDetails(_id)} className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                        View Details
+                    </button>
+                </Link>
             </div>
         </div>
     );
