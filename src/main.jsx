@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound.jsx'
 import ProductList from './components/ProductList.jsx'
 import AddCraftList from './protectedRoute/AddCraftList.jsx'
 import PrivateRoute from './protectedRoute/PrivateRoute.jsx'
+import AllArtItem from './components/AllArtItem.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,21 +21,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Header></Header>,
-        loader: () => fetch('http://localhost:5000/products')
+        element: <Header></Header>
       },
       {
-        path: '/productList',
-        element: <ProductList></ProductList>
+        path: '/allItem',
+        element: <AllArtItem></AllArtItem>,
+        loader: () => fetch('http://localhost:5000/products')
       },
       {
         path: '/addCraft',
         element: <PrivateRoute><AddCraftList></AddCraftList></PrivateRoute>
       },
-      // {
-      //   path: '/details',
-      //   element: 
-      // },
       {
         path: '/login',
         element: <Login></Login>

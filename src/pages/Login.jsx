@@ -11,7 +11,7 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        // console.log(email, password);
 
         signInUser(email, password)
             .then(result => {
@@ -23,8 +23,6 @@ const Login = () => {
                 form.reset();
             })
     }
-
-
 
     return (
         <div className="hero bg-base-200 min-h-screen">
