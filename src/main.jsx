@@ -13,6 +13,7 @@ import ProductList from './components/ProductList.jsx'
 import AddCraftList from './protectedRoute/AddCraftList.jsx'
 import PrivateRoute from './protectedRoute/PrivateRoute.jsx'
 import AllArtItem from './components/AllArtItem.jsx'
+import ItemDetails from './components/ItemDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/itemDetail/:id',
+        element: <ItemDetails></ItemDetails>,
+        loader : ({params})=>fetch(`http://localhost:5000/products/${params.id}`)
       }
     ]
   },
